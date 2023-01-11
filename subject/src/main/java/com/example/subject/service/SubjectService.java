@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SubjectService {
@@ -27,6 +28,15 @@ public class SubjectService {
     public Subject updateUserById(Long id, Subject subject){
         subject.setId(id);
         return subjectRepository.save(subject);
+    }
+
+    public void deleteSubjectById(Long id){
+        Optional<Subject> subjectToDelete = subjectRepository.findById(id);
+        subjectToDelete.ifPresent(subject -> subjectRepository.delete(subject));
+    }
+
+    public void deleteAllSubject(){
+        subjectRepository.deleteAll();
     }
 
 }

@@ -45,13 +45,14 @@ public class SubjectController {
     }
 
     @DeleteMapping("delete/{id}")
-    public String deleteSubjectById(@PathVariable Long id){
-        return "Delete subject by id = " + id;
+    public ResponseEntity<String> deleteSubjectById(@PathVariable Long id){
+        subjectService.deleteSubjectById(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Delete subject by id = " + id);
     }
 
     @DeleteMapping("delete")
-    public String deleteAllSubject(){
-        return "Delete all subject.";
+    public ResponseEntity<String> deleteAllSubject(){
+        subjectService.deleteAllSubject();
+        return ResponseEntity.status(HttpStatus.OK).body("Delete all subject.");
     }
-
 }
